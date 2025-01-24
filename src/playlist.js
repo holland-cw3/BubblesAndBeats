@@ -5,6 +5,7 @@ import h2 from "./music/Qau.mp3";
 import QuackUp from "./music/QuackUp.mp3";
 import waddle from './music/Waddle.mp3';
 import mix from './music/BubbleMix.mp3';
+import quackit from './music/QuackIt.mp3';
 
 
 
@@ -84,7 +85,7 @@ export default function Game() {
               </tr>
               <tr>
                 <td>
-                  <button onClick={() => setSong(hi)}></button>
+                  <button onClick={() => setSong(quackit)}>Quack It</button>
                 </td>
               </tr>
               <tr>

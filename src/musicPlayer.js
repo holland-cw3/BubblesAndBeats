@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import record from "./images/recordDuck.png";
 import quackAttack1Mp3 from "./music/quackattack.mp3"; // Path relative to 'src'
 // import q from "./quackattacks.mp3"; // Path relative to 'src'
 
@@ -8,9 +9,9 @@ let audioBuffer;
 let audioSourceNode;
 let analyser;
 let previousEnergy = 0;
-let energyThreshold = 3000;
+let energyThreshold = 2800;
 
-function loadAudio(url) {
+function loadAudio(url, isPlaying) {
   fetch(url) // URL of the MP3 file
     .then((response) => response.arrayBuffer()) // Convert the file to an ArrayBuffer
     .then((data) => {
@@ -18,20 +19,23 @@ function loadAudio(url) {
         audioBuffer = buffer; // Store the decoded audio buffer
         console.log("Audio loaded successfully");
 
-        playAudio();
+        playAudio(isPlaying);
       });
     })
     .catch((err) => console.error("Error loading audio:", err));
 }
 
-function playAudio() {
+function playAudio(playing) {
+  // Create a new source node and assign the audio buffer
   audioSourceNode = audioContext.createBufferSource();
   audioSourceNode.buffer = audioBuffer; // Assign the decoded buffer to the source node
   audioSourceNode.connect(audioContext.destination); // Connect to speakers
-  audioSourceNode.start(); // Start playing
+  audioSourceNode.start();
 
-  // Start frequency analysis
-
+  // Add an event listener to stop the analysis when playback ends
+  audioSourceNode.onended = () => {
+    playing(false);
+  };
   startAnalysis();
 }
 
@@ -66,8 +70,7 @@ function startAnalysis() {
 
       // Change the square's color
       // document.body.style.backgroundColor = currentColor;
-      document.getElementById("colorSquare").style.backgroundColor =
-        currentColor;
+      document.getElementById("colorSquare").style.borderColor = currentColor;
 
       // Update to the next color, looping back to the first color if necessary
       currentColorIndex = (currentColorIndex + 1) % colors.length;
@@ -75,35 +78,36 @@ function startAnalysis() {
 
     // Update previous energy
     previousEnergy = totalEnergy;
-  }, 210);
+  }, 100);
 }
 
-export default function Game() {
+export default function Game({ songName }) {
   const [playing, isPlaying] = useState(false);
 
   return (
     <div className="App">
+      <div>
+        <img
+          src={record}
+          class="record-img"
+          alt="record"
+          id="colorSquare"
+          style={{
+            border: "9px solid red",
+            transition: "background-color", // Smooth color transition
+          }}
+        ></img>
+      </div>
       <button
         disabled={playing}
         onClick={() => {
-          loadAudio(quackAttack1Mp3);
           isPlaying(true);
+          loadAudio(songName, isPlaying);
         }}
+        class="playb"
       >
-        Load and Play MP3
+        Play Song
       </button>
-
-      {/* Square to visualize the beat detection */}
-      <div
-        id="colorSquare"
-        style={{
-          width: "300px",
-          height: "300px",
-          backgroundColor: "gray",
-          marginTop: "20px",
-          transition: "background-color", // Smooth color transition
-        }}
-      ></div>
     </div>
   );
 }

@@ -6,21 +6,24 @@
 
 
 
+.record-img{
+  width: 40%;
+  animation: App-logo-spin 3s linear infinite; /* Apply the spinning animation */
+  border-radius: 90%;
+  margin-top: 20px;
+}
 
-
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.playb{
+  width: 500px;
+  background-color: rgba(0,0,0,.2);
+  font-size: 30px;
   color: white;
+  margin-left: 2vw;
+  padding: 10px;
+  margin-top: 30px;
 }
 
-.App-link {
-  color: #61dafb;
-}
+
 
 @keyframes App-logo-spin {
   from {

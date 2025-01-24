@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(to bottom, #aebbf5, #4868db);
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.stock-ticker li {
+  margin: 0; /* Remove any margin from list items */
+  padding: 0; /* Remove any padding from list items */
+}
+
+img {
+  width: 100%;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  width: 100%;
+}
+
+.bg {
+  position: fixed;
+  z-index: -1;
+}
+
+.content {
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.stock-ticker {
+  font-size: 15px;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  margin: 0; /* Remove margin from the stock-ticker container */
+  padding: 0;
+}
+
+.stock-ticker ul {
+  list-style: none;
+  flex-shrink: 0;
+  min-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stock-ticker:nth-child(odd) ul {
+  list-style: none;
+  flex-shrink: 0;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  animation: scroll 120s linear infinite;
+}
+
+.stock-ticker:nth-child(even) ul {
+  list-style: none;
+  flex-shrink: 0;
+  min-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: scroll-opposite 120s linear infinite;
+}
+
+/* Animation for scrolling in one direction (for odd lists) */
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-100%)); /* Scroll from right to left */
+  }
+}
+
+/* Animation for scrolling in the opposite direction (for even lists) */
+@keyframes scroll-opposite {
+  0% {
+    transform: translateX(calc(-100%));
+  }
+  100% {
+    transform: translateX(0%); /* Move from left to right */
+  }
+}
+
+/* Apply the opposite direction scroll to the second list */
+.stock-ticker li:nth-child(even) img {
+  transform: scaleX(-1); /* Flip horizontally */
+}
+
+.stock-ticker:not(:nth-last-of-type(2)) {
+  transform: scaleY(-1); /* Flip vertically (opposite scroll) */
+}

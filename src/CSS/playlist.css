@@ -1,0 +1,23 @@
+.padder{
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-bottom: .7vw;
+    padding-top: .5vw;
+
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerBg{
+    width: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8%;
+    padding-bottom: 9%;
+    
+}

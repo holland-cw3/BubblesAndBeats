@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 import record from "./images/recordDuck.png";
-import quackAttack1Mp3 from "./music/quackattack.mp3"; // Path relative to 'src'
-// import q from "./quackattacks.mp3"; // Path relative to 'src'
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let audioBuffer;
@@ -12,13 +10,12 @@ let previousEnergy = 0;
 let energyThreshold = 2800;
 
 function loadAudio(url, isPlaying) {
-  fetch(url) // URL of the MP3 file
-    .then((response) => response.arrayBuffer()) // Convert the file to an ArrayBuffer
+  fetch(url) 
+    .then((response) => response.arrayBuffer())
     .then((data) => {
       audioContext.decodeAudioData(data, (buffer) => {
-        audioBuffer = buffer; // Store the decoded audio buffer
+        audioBuffer = buffer; 
         console.log("Audio loaded successfully");
-
         playAudio(isPlaying);
       });
     })
@@ -94,7 +91,7 @@ export default function Game({ songName }) {
           id="colorSquare"
           style={{
             border: "9px solid red",
-            transition: "background-color", // Smooth color transition
+            transition: "background-color",
           }}
         ></img>
       </div>

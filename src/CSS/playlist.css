@@ -1,52 +1,90 @@
-.padder{
-    padding-left: 2vw;
-    padding-right: 2vw;
-    padding-bottom: .7vw;
-    padding-top: .5vw;
-
-
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.padder {
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-bottom: 0.7vw;
+  padding-top: 0.5vw;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.selector{
-    width: 50%;
+.selector {
+  width: 100%;
 }
+
 
 .selector tr button {
-    width: 500px;
-    background-color: rgba(0,0,0,.2);
-    font-size: 25px;
-    color: white;
-    margin-left: 2vw;
-    padding: 10px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  font-size: 22px;
+  color: rgba(255,255,255,0.6);
+  padding: 10px;
 }
 
-.selector tr:first-of-type button {
-    width: 500px;
-    background-color: transparent;
-    border: none;
-    font-size: 30px;
-    color: white;
-    margin-left: 2vw;
-    padding: 10px;
-    font-weight: bold;
+.songTitle {
+  width: 30%;
+  padding: 10px;
 }
 
-.title{
-    font-size: 30px;
-    color: white;
-    padding: 20px;
-    text-decoration: underline;
+.playlist {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
 }
 
-.playerBg{
-    width: 100%;
-    background-color: rgba(0,0,0,0.6);
+.playerBg {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  border: 2px outset rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 78vh;
+}
+
+
+  
+
+.buttnRow {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+
+.buttnRow .difficulty{
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+}
+
+.buttnRow div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+}
+
+.buttnRow img {
+  width: 8%;
+}
+
+
+
+
+
+.scrollable-container {
+  width: 40vw;
+  margin-left: 1vw;
+  max-height: 63vh;
+  overflow-y: auto;
+
+  border-radius: 3px;
+  border: 2px inset rgba(255, 255, 255, 0.2);
+}
+
+.scrollable-container::-webkit-scrollbar {
+  display: none;
 }

@@ -12,26 +12,50 @@
   width: 100%;
 }
 
-
 .selector tr button {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: none;
+  background-image: url('../images/shopBG.png');
+  border-radius: 2px;
   font-size: 22px;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.9);
   padding: 10px;
+  
 }
+
+.selector tr button img {
+    width: 8%;
+   
+  }
+
+  .active-row {
+   filter: brightness(1.7);
+    transition: background-color 0.3s ease; /* Smooth transition for highlight */
+  }
+
+  
+  
+  .active-row td button {
+    font-weight: bold;
+    color: yellow;
+  }
+
+
 
 .songTitle {
   width: 30%;
   padding: 10px;
 }
 
+
+
 .playlist {
+    display: flex;
+    flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: white;
+  
 }
 
 .playerBg {
@@ -55,24 +79,13 @@
   justify-content:space-between;
 }
 
-.buttnRow .difficulty{
-    display: flex;
-    flex-direction: row;
-}
+
 
 .buttnRow div {
   display: flex;
   flex-direction: column;
-  text-align: left;
   justify-content: center;
 }
-
-.buttnRow img {
-  width: 8%;
-}
-
-
-
 
 
 .scrollable-container {
@@ -80,7 +93,6 @@
   margin-left: 1vw;
   max-height: 63vh;
   overflow-y: auto;
-
   border-radius: 3px;
   border: 2px inset rgba(255, 255, 255, 0.2);
 }

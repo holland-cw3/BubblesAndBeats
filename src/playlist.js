@@ -3,121 +3,68 @@ import quackAttack1Mp3 from "./music/quackattack.mp3";
 import hi from "./music/hi.mp3";
 import h2 from "./music/Qau.mp3";
 import QuackUp from "./music/QuackUp.mp3";
-import waddle from './music/Waddle.mp3';
-import mix from './music/BubbleMix.mp3';
-import quackit from './music/QuackIt.mp3';
-
-
+import waddle from "./music/Waddle.mp3";
+import mix from "./music/BubbleMix.mp3";
+import quackit from "./music/QuackIt.mp3";
+import spooky from "./music/Spooky.mp3";
+import fright from "./music/fright.mp3";
+import jacd from "./music/jacd.mp3";
+import west from "./music/west.mp3";
 
 import songTitle from "./images/songsTitle.png";
-import re from "./images/duck.png";
-import bu from "./images/bubble.png";
 
 import "./CSS/playlist.css";
 import { useState } from "react";
 
-export default function Game() {
+export default function Playlist() {
   const [song, setSong] = useState(quackAttack1Mp3);
-  return (
-    <div class="padder">
-      <div class="playerBg">
-        <div class="playlist">
-          <img src={songTitle} alt="" class="songTitle" />
-          {/* <table>
-            <tr class='buttnRow2'><td>Reward</td><td>Song</td><td>Difficulty</td></tr>
-          </table> */}
-          <div class="scrollable-container">
-            <table class="selector">
-              <tr>
-                <td>
-                  <button onClick={() => setSong(quackAttack1Mp3)}>
-                    <div class="buttnRow">
-                      <img src={re}></img>
-                      <div>
-                        <p>Quack Attack</p>
-                      </div>
+  const [name, setName] = useState("Quack Attack");
+  const [activeRow, setActiveRow] = useState("Quack Attack");
 
-                        <img src={bu}></img>
-                        <img src={bu}></img>
-                        <img src={bu}></img>
-                    </div>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(h2)}>Bubblin'</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(hi)}>Soapy Opera</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(QuackUp)}>
-                    Quack Up
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(waddle)}>waddle'</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(mix)}>mix</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(quackAttack1Mp3)}>
-                    Quack Attack
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(h2)}>Bubblin'</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(quackit)}>Quack It</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(hi)}></button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(hi)}></button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(hi)}></button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(hi)}></button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button onClick={() => setSong(hi)}></button>
-                </td>
-              </tr>
+  const handleRowClick = (newSong, newName) => {
+    setSong(newSong);
+    setName(newName);
+    setActiveRow(newName);
+  };
+
+  const songs = [
+    { file: quackAttack1Mp3, name: "Quack Attack" },
+    { file: h2, name: "Bubblin'" },
+    { file: hi, name: "Soapy Opera" },
+    { file: QuackUp, name: "Quack Up" },
+    { file: waddle, name: "Waddle" },
+    { file: mix, name: "Mix" },
+    { file: spooky, name: "Spooky" },
+    { file: quackit, name: "Quack It" },
+    { file: fright, name: "Fright" },
+    { file: west, name: "West" },
+    { file: jacd, name: "Just a Country Duck" },
+  ];
+
+  return (
+    <div className="padder">
+      <div className="playerBg">
+        <div className="playlist">
+          <img src={songTitle} alt="" class='songTitle'/>
+          <div className="scrollable-container">
+            <table className="selector">
+              {songs.map(({ file, name }) => (
+                <tr
+                  key={name}
+                  className={activeRow === name ? "active-row" : ""}
+                >
+                  <td>
+                    <button onClick={() => handleRowClick(file, name)}>
+                      {name}
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </table>
           </div>
         </div>
 
-        <MusicPlayer songName={song} />
+        <MusicPlayer songName={song} title={name} />
       </div>
     </div>
   );

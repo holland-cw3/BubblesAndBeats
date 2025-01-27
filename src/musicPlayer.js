@@ -7,19 +7,23 @@ let audioBuffer;
 let audioSourceNode;
 let analyser;
 let previousEnergy = 0;
-let energyThreshold = 2800;
+let energyThreshold = 4000;
 
 function loadAudio(url, isPlaying) {
-  fetch(url) 
+  fetch(url)
     .then((response) => response.arrayBuffer())
     .then((data) => {
       audioContext.decodeAudioData(data, (buffer) => {
-        audioBuffer = buffer; 
+        audioBuffer = buffer;
         console.log("Audio loaded successfully");
         playAudio(isPlaying);
       });
     })
     .catch((err) => console.error("Error loading audio:", err));
+}
+
+function stopAudio() {
+  audioSourceNode.stop();
 }
 
 function playAudio(playing) {
@@ -32,6 +36,9 @@ function playAudio(playing) {
   // Add an event listener to stop the analysis when playback ends
   audioSourceNode.onended = () => {
     playing(false);
+    document.getElementById(
+      "nowPlaying"
+    ).innerHTML = `<h1>Now Playing:</h1>`;
   };
   startAnalysis();
 }
@@ -78,15 +85,19 @@ function startAnalysis() {
   }, 100);
 }
 
-export default function Game({ songName }) {
+export default function Game({ songName, title }) {
   const [playing, isPlaying] = useState(false);
 
   return (
+    <div class='play'>
+
+    <div id="nowPlaying"><h1>Now Playing:</h1></div>
+
     <div className="App">
       <div>
         <img
           src={record}
-          class="record-img"
+          className={`record-img ${playing ? "spinning" : ""}`}
           alt="record"
           id="colorSquare"
           style={{
@@ -95,16 +106,32 @@ export default function Game({ songName }) {
           }}
         ></img>
       </div>
+      <div class='controls'>
       <button
         disabled={playing}
         onClick={() => {
           isPlaying(true);
           loadAudio(songName, isPlaying);
+          document.getElementById(
+            "nowPlaying"
+          ).innerHTML = `<h1>Now Playing: ${title}</h1>`;
         }}
         class="playb"
       >
         Play Song
       </button>
+      <button
+        disabled={!playing}
+        onClick={() => {
+          isPlaying(false);
+          stopAudio();
+        }}
+        class="playb"
+      >
+        Stop
+      </button>
+      </div>
+    </div>
     </div>
   );
 }

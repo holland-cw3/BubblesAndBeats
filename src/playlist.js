@@ -45,8 +45,9 @@ export default function Playlist() {
     <div className="padder">
       <div className="playerBg">
         <div className="playlist">
-          <img src={songTitle} alt="" class='songTitle'/>
           <div className="scrollable-container">
+          <img src={songTitle} alt="" class='songTitle'/>
+
             <table className="selector">
               {songs.map(({ file, name }) => (
                 <tr

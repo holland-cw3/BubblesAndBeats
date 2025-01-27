@@ -1,16 +1,21 @@
 .App {
-  text-align: center;
   background-image: url('./images/shopBG.png');
-  filter: brightness(1.5);
-  border: 2px outset rgba(255, 255, 255, 0.1);
-  padding: 5px;
+  border: 2px outset rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 15px;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 15px;
 }
 
 .record-img {
-  width: 35%;
+  width: 39%;
   border-radius: 90%;
-  margin-top: 20px;
 }
+
+
 
 .play{
   display: flex;
@@ -18,9 +23,49 @@
   width: 53%;
   margin-left: 1%;
   text-align: center;
+  color: yellow;
+  height: 60vh;
   
-
 }
+
+.play .border{
+  font-size: 10px;
+  border: .5px solid black;
+  padding: 8px;
+  background: linear-gradient(120deg, #1d1d1d, #a6a6a6 , #898989,#a6a6a6, #303030, #878585);
+}
+
+
+
+.play .controls h1{
+  font-size: 24px;
+  padding: 6px;
+  background: black;
+  border: 2px outset rgba(255, 255, 255, 0.3);
+
+  
+  text-align: left;
+}
+
+
+
+.ducks {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 200px;
+  margin-top: 10px;
+  background-image: url('./images/boatdarkwall.png');
+  border: 2px outset rgba(255, 255, 255, 0.3);
+}
+
+.duck-box {
+  width: 63px;
+  height: 63px;
+  transition: transform 0.2s ease; /* Smooth jump animation */
+}
+
+
 
 .record-img.spinning {
   animation: App-logo-spin 3s linear infinite; /* Apply the spinning animation */
@@ -28,18 +73,20 @@
 
 .controls{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 }
 
 .playb {
-  width: 30%;
-  background-color: rgba(0, 0, 0, 0.2);
+  width: 25vw;
+  background: linear-gradient(135deg, #363535, #a6a6a6, #363535, #a6a6a6);
   font-size: 30px;
-  color: white;
-  margin-left: 2vw;
+  color: black;
   padding: 10px;
   margin-top: 30px;
+  font-weight: bold;
+  border: 3px outset black;
+  text-shadow: 1px 1px 2px #000, 2px 2px 4px #555, 3px 3px 6px #aaa;
 }
 
 #background-wrap {

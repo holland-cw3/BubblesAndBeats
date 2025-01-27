@@ -1,13 +1,16 @@
 import { useState } from "react";
 import "./App.css";
 import record from "./images/recordDuck.png";
+import duck from "./images/talk_animation.gif";
+import still from "./images/duck.png";
+
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let audioBuffer;
 let audioSourceNode;
 let analyser;
 let previousEnergy = 0;
-let energyThreshold = 4000;
+let energyThreshold = 3000;
 
 function loadAudio(url, isPlaying) {
   fetch(url)
@@ -36,9 +39,7 @@ function playAudio(playing) {
   // Add an event listener to stop the analysis when playback ends
   audioSourceNode.onended = () => {
     playing(false);
-    document.getElementById(
-      "nowPlaying"
-    ).innerHTML = `<h1>Now Playing:</h1>`;
+    document.getElementById("nowPlaying").innerHTML = `<h1>Now Playing:</h1>`;
   };
   startAnalysis();
 }
@@ -47,40 +48,41 @@ let currentColorIndex = 0; // Initialize the index for the color sequence
 const colors = ["red", "green", "blue", "yellow", "purple", "orange"]; // Color sequence
 
 function startAnalysis() {
-  // Create an analyser node for frequency analysis
   analyser = audioContext.createAnalyser();
-
-  analyser.fftSize = 4096; // Power of 2 (e.g., 1024)
+  analyser.fftSize = 4096;
   audioSourceNode.connect(analyser);
   analyser.connect(audioContext.destination);
 
-  // Start the audio playback
-
-  // Set up a basic beat detection using energy levels
   const beatDetection = setInterval(() => {
-    // Create a buffer to hold frequency data
     const frequencyData = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(frequencyData);
 
-    // Calculate the total energy in the frequency data
     let totalEnergy = 0;
     for (let i = 0; i < frequencyData.length; i++) {
       totalEnergy += frequencyData[i];
     }
 
-    // Compare with the previous energy level to detect a beat
     if (totalEnergy - previousEnergy > energyThreshold) {
-      const currentColor = colors[currentColorIndex];
+      const boxes = document.querySelectorAll(".duck-box");
 
-      // Change the square's color
-      // document.body.style.backgroundColor = currentColor;
-      document.getElementById("colorSquare").style.borderColor = currentColor;
+      // Randomly select boxes to jump
+      const randomIndexes = new Set();
+      while (randomIndexes.size < Math.ceil(boxes.length / 2)) {
+        randomIndexes.add(Math.floor(Math.random() * boxes.length));
+      }
 
-      // Update to the next color, looping back to the first color if necessary
+      boxes.forEach((box, index) => {
+        if (randomIndexes.has(index)) {
+          box.style.transform = "translateY(-30px)";
+          setTimeout(() => {
+            box.style.transform = "translateY(0px)";
+          }, 100); // Reset after jump
+        }
+      });
+
       currentColorIndex = (currentColorIndex + 1) % colors.length;
     }
 
-    // Update previous energy
     previousEnergy = totalEnergy;
   }, 100);
 }
@@ -89,49 +91,51 @@ export default function Game({ songName, title }) {
   const [playing, isPlaying] = useState(false);
 
   return (
-    <div class='play'>
-
-    <div id="nowPlaying"><h1>Now Playing:</h1></div>
-
-    <div className="App">
-      <div>
+    <div className="play">
+      <div class='border'/>
+      <div className="App">
         <img
           src={record}
           className={`record-img ${playing ? "spinning" : ""}`}
-          alt="record"
-          id="colorSquare"
-          style={{
-            border: "9px solid red",
-            transition: "background-color",
-          }}
+          alt=""
         ></img>
+        <div className="controls">
+          <div id="nowPlaying">
+            <h1>Now Playing:</h1>
+          </div>
+          <button
+            disabled={playing}
+            style={{ color: "#7cfc00" }}
+            onClick={() => {
+              isPlaying(true);
+              loadAudio(songName, isPlaying);
+              document.getElementById(
+                "nowPlaying"
+              ).innerHTML = `<h1>Now Playing: ${title}</h1>`;
+            }}
+            className="playb"
+          >
+            PLAY
+          </button>
+          <button
+            disabled={!playing}
+            onClick={() => {
+              isPlaying(false);
+              stopAudio();
+            }}
+            style={{ color: "red" }}
+            className="playb"
+          >
+            STOP
+          </button>
+        </div>
       </div>
-      <div class='controls'>
-      <button
-        disabled={playing}
-        onClick={() => {
-          isPlaying(true);
-          loadAudio(songName, isPlaying);
-          document.getElementById(
-            "nowPlaying"
-          ).innerHTML = `<h1>Now Playing: ${title}</h1>`;
-        }}
-        class="playb"
-      >
-        Play Song
-      </button>
-      <button
-        disabled={!playing}
-        onClick={() => {
-          isPlaying(false);
-          stopAudio();
-        }}
-        class="playb"
-      >
-        Stop
-      </button>
+      <div class='border'/>
+      <div className="ducks">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <img key={index} className="duck-box" src={playing ? duck : still} alt=""></img>
+        ))}
       </div>
-    </div>
     </div>
   );
 }

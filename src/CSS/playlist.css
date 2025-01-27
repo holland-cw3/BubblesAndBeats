@@ -46,6 +46,14 @@
   padding: 10px;
 }
 
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff; /* Optional: makes the header background visible */
+  z-index: 10; /* Ensure it stays above other content */
+}
 
 
 .playlist {
@@ -66,8 +74,10 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  height: 78vh;
+  column-gap: 10px;
+  margin-top: 30px;
+
+  padding: 30px;
 }
 
 
@@ -91,10 +101,11 @@
 .scrollable-container {
   width: 40vw;
   margin-left: 1vw;
-  max-height: 63vh;
+  max-height: 60vh;
   overflow-y: auto;
   border-radius: 3px;
   border: 2px inset rgba(255, 255, 255, 0.2);
+
 }
 
 .scrollable-container::-webkit-scrollbar {

@@ -4,6 +4,57 @@ import record from "./images/recordDuck.png";
 import duck from "./images/talk_animation.gif";
 import still from "./images/duck.png";
 
+import quackAttack1Mp3 from "./music/quackattack.mp3";
+import hi from "./music/hi.mp3";
+import h2 from "./music/Qau.mp3";
+import QuackUp from "./music/QuackUp.mp3";
+import waddle from "./music/Waddle.mp3";
+import mix from "./music/BubbleMix.mp3";
+import quackit from "./music/QuackIt.mp3";
+import spooky from "./music/Spooky.mp3";
+import fright from "./music/fright.mp3";
+import jacd from "./music/jacd.mp3";
+import west from "./music/west.mp3";
+
+const songs = [
+  { file: quackAttack1Mp3, name: "Quack Attack" },
+  { file: h2, name: "Bubblin'" },
+  { file: hi, name: "Soapy Opera" },
+  { file: QuackUp, name: "Quack Up" },
+  { file: waddle, name: "Waddle" },
+  { file: mix, name: "Mix" },
+  { file: spooky, name: "Spooky" },
+  { file: quackit, name: "Quack It" },
+  { file: fright, name: "Fright" },
+  { file: west, name: "West" },
+  { file: jacd, name: "Just a Country Duck" },
+];
+
+function shuffle(isPlaying, index) {
+  isPlaying(true);
+  let url = songs[index].file;
+
+  fetch(url)
+    .then((response) => response.arrayBuffer())
+    .then((data) => {
+      audioContext.decodeAudioData(data, (buffer) => {
+        audioBuffer = buffer;
+        console.log("Audio loaded successfully");
+
+        audioSourceNode = audioContext.createBufferSource();
+        audioSourceNode.buffer = audioBuffer;
+        audioSourceNode.connect(audioContext.destination);
+        audioSourceNode.start();
+
+        audioSourceNode.onended = () => {
+          shuffle(isPlaying, index + 1);
+
+        };
+        startAnalysis();
+      });
+    })
+    .catch((err) => console.error("Error loading audio:", err));
+}
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let audioBuffer;
@@ -92,7 +143,7 @@ export default function Game({ songName, title }) {
 
   return (
     <div className="play">
-      <div class='border'/>
+      <div class="border" />
       <div className="App">
         <img
           src={record}
@@ -128,12 +179,26 @@ export default function Game({ songName, title }) {
           >
             STOP
           </button>
+          <button
+            onClick={() => {
+              shuffle(isPlaying, 0);
+            }}
+            style={{ color: "red" }}
+            className="playb"
+          >
+            Shuffle
+          </button>
         </div>
       </div>
-      <div class='border'/>
+      <div class="border" />
       <div className="ducks">
         {Array.from({ length: 5 }).map((_, index) => (
-          <img key={index} className="duck-box" src={playing ? duck : still} alt=""></img>
+          <img
+            key={index}
+            className="duck-box"
+            src={playing ? duck : still}
+            alt=""
+          ></img>
         ))}
       </div>
     </div>

@@ -21,16 +21,36 @@ function App() {
       </div>
       <div class="bg">
         <div id="background-wrap">
-          <div class="bubble x1"><img src={bubble}></img></div>
-          <div class="bubble x2"><img src={bubble}></img></div>
-          <div class="bubble x3"><img src={bubble}></img></div>
-          <div class="bubble x4"><img src={bubble}></img></div>
-          <div class="bubble x5"><img src={bubble}></img></div>
-          <div class="bubble x6"><img src={bubble}></img></div>
-          <div class="bubble x7"><img src={bubble}></img></div>
-          <div class="bubble x8"><img src={bubble}></img></div>
-          <div class="bubble x9"><img src={bubble}></img></div>
-          <div class="bubble x10"><img src={bubble}></img></div>
+          <div class="bubble x1">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x2">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x3">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x4">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x5">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x6">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x7">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x8">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x9">
+            <img src={bubble}></img>
+          </div>
+          <div class="bubble x10">
+            <img src={bubble}></img>
+          </div>
         </div>
         <div class="stock-ticker">
           <ul>

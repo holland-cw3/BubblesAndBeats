@@ -39,20 +39,31 @@
     color: yellow;
   }
 
+.songTitleContainer{
+  background: linear-gradient(120deg, #1d1d1d, #a6a6a6 , #898989,#a6a6a6, #303030, #878585);
+  width: 40vw;
+  margin-left: 1vw;
+  margin-bottom: 5px;
+  border: 1px solid black;
+
+}
 
 
 .songTitle {
-  width: 30%;
+  width: 25%;
   padding: 10px;
+  
 }
+
+
 
 .fixed-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: #fff; /* Optional: makes the header background visible */
-  z-index: 10; /* Ensure it stays above other content */
+  background-color: #fff;
+  z-index: 10; 
 }
 
 
@@ -101,7 +112,7 @@
 .scrollable-container {
   width: 40vw;
   margin-left: 1vw;
-  max-height: 60vh;
+  max-height: 49vh;
   overflow-y: auto;
   border-radius: 3px;
   border: 2px inset rgba(255, 255, 255, 0.2);
